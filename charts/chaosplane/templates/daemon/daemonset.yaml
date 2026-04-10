@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "chaosplane.fullname" . }}-daemon
+  labels:
+    {{- include "chaosplane.labels" . | nindent 4 }}
+    app.kubernetes.io/component: daemon
+spec:
+  selector:
+    matchLabels:
+      {{- include "chaosplane.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: daemon
+  template:
+    metadata:
+      labels:
+        {{- include "chaosplane.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: daemon
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "chaosplane.daemon.serviceAccountName" . }}
+      hostPID: false
+      hostNetwork: false
+      tolerations:
+        - operator: Exists
+      containers:
+        - name: daemon
+          image: {{ include "chaosplane.daemon.image" . }}
+          imagePullPolicy: {{ .Values.daemon.image.pullPolicy }}
+          ports:
+            - name: health
+              containerPort: 8082
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: health
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: health
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.daemon.resources | nindent 12 }}
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+              drop:
+                - ALL

@@ -1,0 +1,120 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: blastradiuspolicies.chaos.chaosplane.io
+  labels:
+    app.kubernetes.io/part-of: chaosplane
+spec:
+  group: chaos.chaosplane.io
+  names:
+    kind: BlastRadiusPolicy
+    listKind: BlastRadiusPolicyList
+    plural: blastradiuspolicies
+    singular: blastradiuspolicy
+    shortNames:
+      - brp
+  scope: Namespaced
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      additionalPrinterColumns:
+        - name: Enforcement
+          type: string
+          jsonPath: .spec.enforcement
+        - name: Max Targets
+          type: integer
+          jsonPath: .spec.targetLimits.maxTargets
+        - name: Age
+          type: date
+          jsonPath: .metadata.creationTimestamp
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - scope
+                - targetLimits
+                - protectedResources
+                - enforcement
+              properties:
+                scope:
+                  type: object
+                  properties:
+                    namespaces:
+                      type: array
+                      items:
+                        type: string
+                    labelSelector:
+                      type: object
+                      properties:
+                        matchLabels:
+                          type: object
+                          additionalProperties:
+                            type: string
+                        matchExpressions:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                              - key
+                              - operator
+                            properties:
+                              key:
+                                type: string
+                              operator:
+                                type: string
+                              values:
+                                type: array
+                                items:
+                                  type: string
+                targetLimits:
+                  type: object
+                  properties:
+                    maxTargets:
+                      type: integer
+                      format: int32
+                    maxPercentage:
+                      type: integer
+                      format: int32
+                protectedResources:
+                  type: object
+                  properties:
+                    namespaces:
+                      type: array
+                      items:
+                        type: string
+                    labels:
+                      type: object
+                      additionalProperties:
+                        type: string
+                    names:
+                      type: array
+                      items:
+                        type: object
+                        required:
+                          - kind
+                          - name
+                        properties:
+                          kind:
+                            type: string
+                          name:
+                            type: string
+                          namespace:
+                            type: string
+                actionLimits:
+                  type: object
+                  properties:
+                    allowedActions:
+                      type: array
+                      items:
+                        type: string
+                    maxDuration:
+                      type: string
+                enforcement:
+                  type: string
+                  enum:
+                    - Enforce
+                    - Audit

@@ -1,0 +1,40 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "chaosplane.fullname" . }}-daemon
+  labels:
+    {{- include "chaosplane.labels" . | nindent 4 }}
+    app.kubernetes.io/component: daemon
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - nodes
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - chaos.chaosplane.io
+    resources:
+      - chaosexperiments
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - chaos.chaosplane.io
+    resources:
+      - chaosexperiments/status
+    verbs:
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - patch

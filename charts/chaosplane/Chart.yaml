@@ -1,0 +1,12 @@
+apiVersion: v2
+name: chaosplane
+description: ChaosPlane - Open-source chaos engineering platform for Kubernetes
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+home: https://chaosplane.io
+sources:
+  - https://github.com/chaosplane-hq/chaosplane
+maintainers:
+  - name: ChaosPlane Team
+    email: team@chaosplane.io

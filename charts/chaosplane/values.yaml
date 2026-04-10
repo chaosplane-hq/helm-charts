@@ -1,0 +1,36 @@
+operator:
+  image:
+    repository: ghcr.io/chaosplane-hq/chaosplane-operator
+    tag: ""  # defaults to appVersion
+    pullPolicy: IfNotPresent
+  replicas: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  serviceAccount:
+    create: true
+    name: ""
+
+daemon:
+  image:
+    repository: ghcr.io/chaosplane-hq/chaosplane-daemon
+    tag: ""
+    pullPolicy: IfNotPresent
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  serviceAccount:
+    create: true
+    name: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
