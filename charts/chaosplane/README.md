@@ -7,7 +7,7 @@ Helm chart for deploying ChaosPlane chaos engineering platform on Kubernetes.
 - Operator: Reconciles ChaosExperiment and BlastRadiusPolicy custom resources
 - Daemon: DaemonSet running on all worker nodes for executing chaos actions
 
-## Install
+## Install 
 
 ```bash
 helm install chaosplane ./charts/chaosplane
