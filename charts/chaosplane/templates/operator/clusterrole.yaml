@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/component: operator
 rules:
   - apiGroups:
-      - chaos.chaosplane.io
+      - chaos.chaosplane.dev
     resources:
       - chaosexperiments
       - blastradiuspolicies
@@ -20,7 +20,7 @@ rules:
       - patch
       - delete
   - apiGroups:
-      - chaos.chaosplane.io
+      - chaos.chaosplane.dev
     resources:
       - chaosexperiments/status
     verbs:
@@ -28,7 +28,7 @@ rules:
       - update
       - patch
   - apiGroups:
-      - chaos.chaosplane.io
+      - chaos.chaosplane.dev
     resources:
       - chaosexperiments/finalizers
     verbs:

@@ -1,6 +1,6 @@
 # ChaosPlane Helm Charts
 
-Helm charts for deploying [ChaosPlane](https://chaosplane.io) — open-source chaos engineering platform for Kubernetes.
+Helm charts for deploying [ChaosPlane](https://chaosplane.dev) — open-source chaos engineering platform for Kubernetes.
 
 ## Charts
 

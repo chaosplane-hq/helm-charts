@@ -16,7 +16,7 @@ rules:
       - list
       - watch
   - apiGroups:
-      - chaos.chaosplane.io
+      - chaos.chaosplane.dev
     resources:
       - chaosexperiments
     verbs:
@@ -24,7 +24,7 @@ rules:
       - list
       - watch
   - apiGroups:
-      - chaos.chaosplane.io
+      - chaos.chaosplane.dev
     resources:
       - chaosexperiments/status
     verbs:
