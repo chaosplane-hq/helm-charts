@@ -3,12 +3,12 @@ entries:
   chaosplane:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-04-17T02:10:41.674740517Z"
+    created: "2026-05-12T03:02:42.809617413Z"
     description: ChaosPlane - Open-source chaos engineering platform for Kubernetes
-    digest: 3d9fd2093dc9feb1e219b4a4bb08ecaa5c5feaddd8a9e30a07fbd117fe3833ea
-    home: https://chaosplane.io
+    digest: f136865a9a754b0642e8a12425d7610452d345efbf7ab9ee74738aeb586509a3
+    home: https://chaosplane.dev
     maintainers:
-    - email: team@chaosplane.io
+    - email: team@chaosplane.dev
       name: ChaosPlane Team
     name: chaosplane
     sources:
@@ -17,4 +17,4 @@ entries:
     urls:
     - https://chaosplane-hq.github.io/helm-charts/chaosplane-0.1.0.tgz
     version: 0.1.0
-generated: "2026-04-17T02:10:41.674217191Z"
+generated: "2026-05-12T03:02:42.808494846Z"
